@@ -6,6 +6,9 @@ import orderRoutes from './order.routes.js'
 import reviewRoutes from './review.routes.js'
 import wishlistRoutes from './wishlist.routes.js'
 import addressRoutes from './address.routes.js'
+import categoryRoutes from './category.routes.js'
+import couponRoutes from './coupon.routes.js'
+
 
 const router = Router()
 
@@ -20,6 +23,8 @@ router.use('/orders', orderRoutes)
 router.use('/reviews', reviewRoutes)
 router.use('/wishlist', wishlistRoutes)
 router.use('/addresses', addressRoutes)
+router.use('/categories', categoryRoutes)
+router.use('/coupons', couponRoutes)
 
 
 export default router
