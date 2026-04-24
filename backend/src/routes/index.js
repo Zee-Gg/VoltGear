@@ -8,6 +8,8 @@ import wishlistRoutes from './wishlist.routes.js'
 import addressRoutes from './address.routes.js'
 import categoryRoutes from './category.routes.js'
 import couponRoutes from './coupon.routes.js'
+import paymentRoutes from './payment.routes.js'
+
 
 
 const router = Router()
@@ -25,6 +27,7 @@ router.use('/wishlist', wishlistRoutes)
 router.use('/addresses', addressRoutes)
 router.use('/categories', categoryRoutes)
 router.use('/coupons', couponRoutes)
+router.use('/payments', paymentRoutes)
 
 
 export default router
