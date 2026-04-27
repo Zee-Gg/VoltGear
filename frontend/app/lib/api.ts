@@ -8,6 +8,8 @@ const api = axios.create({
   }
 })
 
+console.log('API URL:', process.env.NEXT_PUBLIC_API_URL)
+
 // Attach access token to every request automatically
 api.interceptors.request.use((config) => {
   if (typeof window !== 'undefined') {
