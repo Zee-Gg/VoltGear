@@ -24,7 +24,9 @@ export default function RootLayout({
         <AuthProvider>
           <CartProvider>
             <Navbar/>
-            <main className="min-h-screen bg-gray-50">
+            <main className="min-h-screen relative overflow-hidden">
+              <div className="ambient-glow top-0 left-1/4"></div>
+              <div className="ambient-glow bottom-0 right-1/4" style={{ background: 'radial-gradient(circle, rgba(139,92,246,0.1) 0%, rgba(15,23,42,0) 70%)' }}></div>
               {children}
             </main>
           </CartProvider>
