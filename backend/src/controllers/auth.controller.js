@@ -103,3 +103,40 @@ export const getMe = async (req, res, next) => {
     data: req.user
   })
 }
+
+export const updateProfile = async (req, res, next) => {
+  try {
+    const { name } = req.body
+    const user = await authService.updateUserProfile(req.user.id, { name })
+
+    res.status(200).json({
+      success: true,
+      message: 'Profile updated successfully',
+      data: user
+    })
+  } catch (error) {
+    next(error)
+  }
+}
+
+export const updatePassword = async (req, res, next) => {
+  try {
+    const { currentPassword, newPassword } = req.body
+
+    if (!currentPassword || !newPassword) {
+      return res.status(400).json({
+        success: false,
+        message: 'Current and new passwords are required'
+      })
+    }
+
+    await authService.updateUserPassword(req.user.id, currentPassword, newPassword)
+
+    res.status(200).json({
+      success: true,
+      message: 'Password updated successfully'
+    })
+  } catch (error) {
+    next(error)
+  }
+}

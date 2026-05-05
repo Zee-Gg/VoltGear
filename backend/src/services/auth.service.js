@@ -118,3 +118,36 @@ export const logoutUser = async (refreshToken) => {
     })
   }
 }
+
+export const updateUserProfile = async (userId, { name }) => {
+  const user = await prisma.user.update({
+    where: { id: userId },
+    data: { name },
+    select: {
+      id: true,
+      name: true,
+      email: true,
+      role: true
+    }
+  })
+
+  return user
+}
+
+export const updateUserPassword = async (userId, currentPassword, newPassword) => {
+  const user = await prisma.user.findUnique({
+    where: { id: userId }
+  })
+
+  const isPasswordValid = await bcrypt.compare(currentPassword, user.password)
+  if (!isPasswordValid) {
+    throw new Error('Current password is incorrect')
+  }
+
+  const hashedPassword = await bcrypt.hash(newPassword, 12)
+
+  await prisma.user.update({
+    where: { id: userId },
+    data: { password: hashedPassword }
+  })
+}
