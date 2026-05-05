@@ -9,6 +9,8 @@ import addressRoutes from './address.routes.js'
 import categoryRoutes from './category.routes.js'
 import couponRoutes from './coupon.routes.js'
 import paymentRoutes from './payment.routes.js'
+import dashboardRoutes from './dashboard.routes.js'
+import userRoutes from './user.routes.js'
 
 
 
@@ -28,6 +30,8 @@ router.use('/addresses', addressRoutes)
 router.use('/categories', categoryRoutes)
 router.use('/coupons', couponRoutes)
 router.use('/payments', paymentRoutes)
+router.use('/dashboard', dashboardRoutes)
+router.use('/users', userRoutes)
 
 
 export default router
