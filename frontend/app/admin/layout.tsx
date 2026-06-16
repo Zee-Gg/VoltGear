@@ -12,7 +12,7 @@ import {
   Ticket, 
   ChevronRight,
   LogOut,
-  ShieldCheck,
+  Zap,
   Loader2
 } from 'lucide-react'
 
@@ -52,9 +52,9 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         <div className="p-8">
           <Link href="/" className="flex items-center gap-3 group">
             <div className="w-10 h-10 bg-gradient-primary rounded-xl flex items-center justify-center shadow-[0_0_20px_rgba(79,70,229,0.4)] group-hover:scale-110 transition-transform">
-              <ShieldCheck className="text-white" size={24} />
+              <Zap className="text-white" size={20} fill="currentColor" />
             </div>
-            <span className="text-2xl font-black text-white tracking-tighter">VOLT<span className="text-gradient">GEAR</span></span>
+            <span className="text-2xl font-black text-white tracking-tighter">Volt<span className="text-indigo-400">Gear</span></span>
           </Link>
           <div className="mt-2 px-1">
             <span className="text-[10px] font-black uppercase tracking-[0.3em] text-indigo-400">Admin Panel</span>
