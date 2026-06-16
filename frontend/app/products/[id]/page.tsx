@@ -148,6 +148,7 @@ export default function ProductDetailPage() {
                 src={product.images[activeImage] || 'https://via.placeholder.com/600'} 
                 alt={product.name}
                 fill
+                sizes="(max-width: 768px) 100vw, 50vw"
                 className="object-contain p-8 group-hover:scale-105 transition-transform duration-700"
                 priority
               />

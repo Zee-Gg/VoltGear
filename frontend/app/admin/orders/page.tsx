@@ -12,7 +12,8 @@ import {
   Truck,
   Package,
   XCircle,
-  Eye
+  Eye,
+  LucideIcon
 } from 'lucide-react'
 import api from '../../lib/api'
 import Link from 'next/link'
@@ -66,7 +67,7 @@ export default function AdminOrders() {
     o.user.email.toLowerCase().includes(searchTerm.toLowerCase())
   )
 
-  const statusIcons: Record<string, unknown> = {
+  const statusIcons: Record<string, LucideIcon> = {
     'PENDING': Clock,
     'PROCESSING': Package,
     'SHIPPED': Truck,

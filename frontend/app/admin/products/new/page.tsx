@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
+import Image from 'next/image'
 import { 
   ChevronLeft, 
   Save, 
@@ -250,7 +251,7 @@ export default function NewProduct() {
                   fill 
                   className="object-contain p-4"
                   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                  onError={(e) => { (e.target as any).src = 'https://via.placeholder.com/300?text=Invalid+URL' }}
+                  onError={(e: { target: any }) => { (e.target as any).src = 'https://via.placeholder.com/300?text=Invalid+URL' }}
                 />
               ) : (
                 <div className="text-center p-8">
