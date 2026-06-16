@@ -5,20 +5,33 @@ import { useAuth } from '../context/AuthContext'
 import { useCart } from '../context/CartContext'
 import { ShoppingCart, User, LogOut, Menu, X, Zap } from 'lucide-react'
 import { useState, useEffect } from 'react'
+import { usePathname } from 'next/navigation'
 
 export default function Navbar() {
   const { user, logout, isAuthenticated, isAdmin } = useAuth()
   const { itemCount } = useCart()
+  const pathname = usePathname()
   const [menuOpen, setMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const [mounted, setMounted] = useState(false)
+
+  // Hide Navbar on admin pages (only after hydration)
+  const shouldHide = mounted && pathname?.startsWith('/admin')
 
   useEffect(() => {
+    setMounted(true)
+    
     const handleScroll = () => {
       setScrolled(window.scrollY > 20)
     }
+    
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
+
+  if (shouldHide) {
+    return null
+  }
 
   return (
     <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? 'glass py-3' : 'bg-transparent py-5'}`}>
