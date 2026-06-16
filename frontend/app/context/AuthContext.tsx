@@ -24,24 +24,30 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined)
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<User | null>(null)
   const [loading, setLoading] = useState(true)
+  const [mounted, setMounted] = useState(false)
 
   // Check if user is already logged in on app load
   useEffect(() => {
     const checkAuth = async () => {
-      const token = localStorage.getItem('accessToken')
-
-      if (!token) {
-        setLoading(false)
-        return
-      }
-
       try {
-        const response = await api.get('/auth/me')
-        setUser(response.data.data)
-      } catch {
-        localStorage.removeItem('accessToken')
+        const token = typeof window !== 'undefined' ? localStorage.getItem('accessToken') : null
+
+        if (!token) {
+          setLoading(false)
+          return
+        }
+
+        try {
+          const response = await api.get('/auth/me')
+          setUser(response.data.data)
+        } catch {
+          if (typeof window !== 'undefined') {
+            localStorage.removeItem('accessToken')
+          }
+        }
       } finally {
         setLoading(false)
+        setMounted(true)
       }
     }
 
@@ -51,7 +57,9 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const login = async (email: string, password: string) => {
     const response = await api.post('/auth/login', { email, password })
     const { user, accessToken } = response.data.data
-    localStorage.setItem('accessToken', accessToken)
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('accessToken', accessToken)
+    }
     setUser(user)
   }
 
@@ -59,9 +67,13 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     try {
       await api.post('/auth/logout')
     } finally {
-      localStorage.removeItem('accessToken')
+      if (typeof window !== 'undefined') {
+        localStorage.removeItem('accessToken')
+      }
       setUser(null)
-      window.location.href = '/'
+      if (typeof window !== 'undefined') {
+        window.location.href = '/'
+      }
     }
   }
 
